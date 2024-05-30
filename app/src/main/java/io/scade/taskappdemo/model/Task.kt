@@ -1,6 +1,3 @@
 package io.scade.taskappdemo.model
 
-import android.os.Parcelable
-
-
-data class Task(val title: String, val description: String)
+data class Task(val taskID: String, val title: String, val description: String?, val isCompleted: Boolean = false, val subTasks: List<SubTask>?, val tags: List<String>?)

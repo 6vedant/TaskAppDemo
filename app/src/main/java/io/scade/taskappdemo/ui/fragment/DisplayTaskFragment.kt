@@ -5,15 +5,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import io.scade.taskappdemo.databinding.FragmentCreateTaskBinding
+import io.scade.taskappdemo.databinding.FragmentDisplayTaskBinding
 
 class DisplayTaskFragment: Fragment() {
+    private lateinit var binding: FragmentDisplayTaskBinding
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return super.onCreateView(inflater, container, savedInstanceState)
+        binding = FragmentDisplayTaskBinding.inflate(inflater, container, false)
+
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
