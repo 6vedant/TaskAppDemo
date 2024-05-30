@@ -1,10 +1,11 @@
-package io.scade.taskappdemo;
+package io.scade.taskappdemo.ui.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.widget.Toast;
 
+import io.scade.taskappdemo.R;
 import io.scade.taskappdemo.adapter.TaskRecyclerAdapter;
 
 
