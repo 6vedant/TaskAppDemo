@@ -2,11 +2,6 @@
 
 <layout xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <data>
-        <variable
-            name="task"
-            type="io.scade.taskappdemo.model.Task" />
-    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
@@ -16,7 +11,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="@{task.title}"
+            android:text="create task"
             android:textColor="@color/black"
             android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"

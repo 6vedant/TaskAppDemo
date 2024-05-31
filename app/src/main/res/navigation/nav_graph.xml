@@ -44,7 +44,7 @@
             android:name="taskArg"
             app:argType="io.scade.taskappdemo.model.Task"
             android:defaultValue="@null"
-            app:nullable="false"/>
+            app:nullable="true"/>
     </fragment>
 
     <fragment
@@ -56,7 +56,7 @@
             android:name="taskArg"
             app:argType="io.scade.taskappdemo.model.Task"
             android:defaultValue="@null"
-            app:nullable="false"/>
+            app:nullable="true"/>
     </fragment>
 
     <fragment
@@ -68,7 +68,7 @@
             android:name="taskArg"
             app:argType="io.scade.taskappdemo.model.Task"
             android:defaultValue="@null"
-            app:nullable="false"/>
+            app:nullable="true"/>
     </fragment>
 
 </navigation>
