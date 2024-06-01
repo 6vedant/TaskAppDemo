@@ -18,6 +18,7 @@ import io.scade.taskappdemo.model.SubTask
 import io.scade.taskappdemo.model.Task
 import io.scade.taskappdemo.viewmodel.TaskViewModel
 import io.scade.taskappdemo.viewmodel.TaskViewModelFactory
+import java.lang.Exception
 
 class DisplayTaskFragment : Fragment() {
     private lateinit var binding: FragmentDisplayTaskBinding
@@ -81,7 +82,7 @@ class DisplayTaskFragment : Fragment() {
                     Toast.makeText(context, "clicked on item", Toast.LENGTH_SHORT).show()
                 }, subTaskTextClickListener = {
                     it.isSubTaskExpandable = !it.isSubTaskExpandable
-                }))
+                }), viewModel = taskViewModel)
             }
 
         binding.recyclerViewTasks.layoutManager = LinearLayoutManager(context)
@@ -89,8 +90,11 @@ class DisplayTaskFragment : Fragment() {
         binding.recyclerViewTasks.adapter = taskRecyclerAdapter
 
         taskViewModel.tasksList.observe(viewLifecycleOwner, Observer {
-            Toast.makeText(context, "Updated: " + it.toString(), Toast.LENGTH_SHORT).show()
-
+            try {
+                taskRecyclerAdapter?.notifyDataSetChanged()
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
         })
     }
 }

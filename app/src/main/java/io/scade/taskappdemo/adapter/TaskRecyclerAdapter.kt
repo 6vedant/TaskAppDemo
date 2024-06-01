@@ -11,10 +11,12 @@ import androidx.recyclerview.widget.RecyclerView.VISIBLE
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import io.scade.taskappdemo.databinding.TaskRecyclerItemBinding
 import io.scade.taskappdemo.model.Task
+import io.scade.taskappdemo.viewmodel.TaskViewModel
 
 public class TaskRecyclerAdapter constructor(
-    val tasks: List<Task>,
-    val clickListener: TaskItemClickListener
+    var tasks: List<Task>,
+    val clickListener: TaskItemClickListener,
+    private val viewModel: TaskViewModel,
 ) : RecyclerView.Adapter<TaskRecyclerAdapter.ItemViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
@@ -29,12 +31,12 @@ public class TaskRecyclerAdapter constructor(
     }
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
-        holder.bind(tasks[position], clickListener)
+        holder.bind(tasks[position], clickListener, viewModel)
     }
 
     class ItemViewHolder constructor(private val binding: TaskRecyclerItemBinding) :
         ViewHolder(binding.root) {
-        fun bind(item: Task?, clickListener: TaskItemClickListener) {
+        fun bind(item: Task?, clickListener: TaskItemClickListener, viewModel: TaskViewModel) {
             item.let {
                 binding.task = it
                 binding.clickListener = clickListener
@@ -48,17 +50,31 @@ public class TaskRecyclerAdapter constructor(
                             "Clicked on sub-task: ${subTask.title}",
                             Toast.LENGTH_SHORT
                         ).show()
-                    })
+                    }, viewModel)
 
                 binding.subTasksRecyclerView.layoutManager =
                     LinearLayoutManager(binding.root.context)
                 binding.subTasksRecyclerView.setHasFixedSize(true)
                 binding.subTasksRecyclerView.adapter = subTaskAdapter
 
+
+                // Add OnCheckedChangeListener for CheckBox
+                binding.checkBoxTask.setOnCheckedChangeListener { buttonView, isChecked ->
+                    it.isCompleted = isChecked
+                    if(isChecked) {
+                        for(subtask in it.subTasks!!) {
+                            subtask.let {
+                                subtask.isCompleted = isChecked
+                            }
+                        }
+                    }
+                    viewModel.updateTask(updatedTask = it)
+                }
                 // Toggle visibility of expandable layout
                 // binding.expandableLayout.visibility = if (it!!.isSubTaskExpandable) View.VISIBLE else View.GONE
 
                 binding.executePendingBindings()
+                
 
 
             }
