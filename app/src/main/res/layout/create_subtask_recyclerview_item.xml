@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="subTask"
+            type="io.scade.taskappdemo.model.SubTask" />
+
+<!--        <variable-->
+<!--            name="clickListener"-->
+<!--            type="io.scade.taskappdemo.adapter.AddSubTaskClickListener" />-->
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp">
+
+        <!-- Checkbox for subtask completion -->
+        <CheckBox
+            android:id="@+id/checkBoxSubTask"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:checked="@{subTask.completed}" />
+
+        <!-- Subtask title -->
+        <TextView
+            android:id="@+id/textViewSubTaskTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/checkBoxSubTask"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="8dp"
+            android:text="@{subTask.title}"
+            android:textSize="16sp" />
+
+        <!-- Delete icon -->
+        <ImageView
+            android:id="@+id/imageViewDelete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:src="@drawable/ic_delete"
+            android:contentDescription="@string/delete_subtask" />
+
+    </RelativeLayout>
+</layout>
