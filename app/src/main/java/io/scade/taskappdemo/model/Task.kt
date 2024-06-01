@@ -7,6 +7,7 @@ data class Task(
     val title: String,
     val description: String?,
     val isCompleted: Boolean = false,
-    val subTasks: List<SubTask>?,
-    val tags: List<String>?
+    var subTasks: List<SubTask>?,
+    val tags: List<String>?,
+    val date: String?
 ) : Serializable

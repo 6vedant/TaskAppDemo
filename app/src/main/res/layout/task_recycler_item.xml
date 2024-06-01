@@ -1,103 +1,117 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="8dp"
-    app:cardCornerRadius="8dp"
-    app:cardElevation="4dp">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <RelativeLayout
+    <data>
+
+        <variable
+            name="task"
+            type="io.scade.taskappdemo.model.Task" />
+
+        <variable
+            name="clickListener"
+            type="io.scade.taskappdemo.adapter.TaskItemClickListener" />
+    </data>
+
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp">
+        android:layout_margin="8dp"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="4dp">
 
-        <!-- Checkbox for task completion -->
-        <CheckBox
-            android:id="@+id/checkBoxTask"
-            android:layout_width="wrap_content"
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_marginStart="8dp"
-            android:layout_marginBottom="8dp" />
+            android:padding="16dp">
 
-        <!-- Task title -->
-        <TextView
-            android:id="@+id/textViewTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_toRightOf="@+id/checkBoxTask"
-            android:text="Task Title"
-            android:textSize="16sp"
-            android:textStyle="bold" />
-
-        <!-- Task description -->
-        <TextView
-            android:id="@+id/textViewDescription"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/textViewTitle"
-            android:layout_alignStart="@id/textViewTitle"
-            android:layout_marginTop="4dp"
-            android:text="Task description goes here"
-            android:textColor="@android:color/darker_gray"
-            android:textSize="14sp" />
-
-        <!-- Tags -->
-        <LinearLayout
-            android:id="@+id/tagsContainer"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/textViewDescription"
-            android:layout_alignStart="@id/textViewDescription"
-            android:layout_marginTop="8dp"
-            android:orientation="horizontal">
-
-            <!-- Example tag -->
-            <TextView
-                android:id="@+id/tag1"
+            <!-- Checkbox for task completion -->
+            <CheckBox
+                android:id="@+id/checkBoxTask"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="4dp"
-                android:background="@drawable/tag_background"
-                android:padding="4dp"
-                android:text="Tag 1"
+                android:layout_alignParentLeft="true"
+                android:layout_marginStart="8dp"
+                android:layout_marginBottom="8dp" />
+
+            <!-- Task title -->
+            <TextView
+                android:id="@+id/textViewTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_toRightOf="@+id/checkBoxTask"
+                android:text="Task Title"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <!-- Task description -->
+            <TextView
+                android:id="@+id/textViewDescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textViewTitle"
+                android:layout_alignStart="@id/textViewTitle"
+                android:layout_marginTop="4dp"
+                android:text="Task description goes here"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="14sp" />
+
+            <!-- Tags -->
+            <LinearLayout
+                android:id="@+id/tagsContainer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textViewDescription"
+                android:layout_alignStart="@id/textViewDescription"
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal">
+
+                <!-- Example tag -->
+                <TextView
+                    android:id="@+id/tag1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="4dp"
+                    android:background="@drawable/tag_background"
+                    android:padding="4dp"
+                    android:text="Tag 1"
+                    android:textColor="@android:color/white"
+                    android:textSize="12sp" />
+
+                <!-- More tags can be added programmatically -->
+            </LinearLayout>
+
+            <!-- Subtasks button/chip -->
+            <TextView
+                android:id="@+id/textViewSubtasks"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tagsContainer"
+                android:layout_alignStart="@id/tagsContainer"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/chip_background"
+                android:paddingHorizontal="8dp"
+                android:paddingVertical="4dp"
+                android:text="4 subtasks"
                 android:textColor="@android:color/white"
                 android:textSize="12sp" />
 
-            <!-- More tags can be added programmatically -->
-        </LinearLayout>
-
-        <!-- Subtasks button/chip -->
-        <TextView
-            android:id="@+id/textViewSubtasks"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tagsContainer"
-            android:layout_alignStart="@id/tagsContainer"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/chip_background"
-            android:paddingHorizontal="8dp"
-            android:paddingVertical="4dp"
-            android:text="4 subtasks"
-            android:textColor="@android:color/white"
-            android:textSize="12sp" />
-
-        <RelativeLayout
-            android:id="@+id/expandable_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/textViewSubtasks"
-            android:layout_marginStart="18dp"
-            android:layout_marginTop="8dp">
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/subTasksRecyclerView"
+            <RelativeLayout
+                android:id="@+id/expandable_layout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textViewSubtasks"
+                android:layout_marginStart="18dp"
+                android:layout_marginTop="8dp">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/subTasksRecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </RelativeLayout>
+
         </RelativeLayout>
 
-    </RelativeLayout>
-
-</androidx.cardview.widget.CardView>
+    </androidx.cardview.widget.CardView>
+</layout>
