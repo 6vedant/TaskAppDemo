@@ -9,5 +9,6 @@ data class Task(
     val isCompleted: Boolean = false,
     var subTasks: List<SubTask>?,
     val tags: List<String>?,
-    val date: String?
+    val date: String?,
+    var isSubTaskExpandable: Boolean = false
 ) : Serializable

@@ -39,20 +39,35 @@ class DisplayTaskFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.fabAddTask.setOnClickListener {
+            val subTask1 = SubTask("kkadfaa", "k1", "erhh", true)
+            val subTask2 = SubTask("kkdaaa", "k1", "eaarhh", false)
+
+            val task = Task(
+                "k1",
+                "Task 2 new title",
+                "Here is the description",
+                false,
+                mutableListOf(subTask1, subTask2),
+                listOf("Official", "Immediate"),
+                "3-10-2024"
+            )
+
+            taskViewModel.addTask(task)
             this.findNavController().navigate(
                 DisplayTaskFragmentDirections.actionNavigateToCreateTaskFragment()
             )
+
         }
         val subTask1 = SubTask("kka", "k", "erhh", true)
         val subTask2 = SubTask("kkaa", "k", "eaarhh", false)
 
         val task = Task(
             "k",
-            "k",
-            "k",
+            "Task New Title",
+            "Here is the description",
             true,
             mutableListOf(subTask1, subTask2),
-            listOf("tag1", "tag2"),
+            listOf("Personal", "Immediate"),
             "3-10-2024"
         )
 
@@ -61,11 +76,13 @@ class DisplayTaskFragment : Fragment() {
 
         // init the adapter and bind it to the recyclerview
         val taskRecyclerAdapter =
-            TaskRecyclerAdapter(listOf(task), TaskItemClickListener(itemClickListener = {
-                Toast.makeText(context, "clicked on item", Toast.LENGTH_SHORT).show()
-            }, subTaskTextClickListener = {
-                Toast.makeText(context, "Clickedo n subtask", Toast.LENGTH_SHORT).show()
-            }))
+            taskViewModel.tasksList.value?.let {
+                TaskRecyclerAdapter(it, TaskItemClickListener(itemClickListener = {
+                    Toast.makeText(context, "clicked on item", Toast.LENGTH_SHORT).show()
+                }, subTaskTextClickListener = {
+                    it.isSubTaskExpandable = !it.isSubTaskExpandable
+                }))
+            }
 
         binding.recyclerViewTasks.layoutManager = LinearLayoutManager(context)
         binding.recyclerViewTasks.setHasFixedSize(true)

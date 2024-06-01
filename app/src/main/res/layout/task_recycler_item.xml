@@ -17,9 +17,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
+        android:onClick="@{() -> clickListener.onItemClick(task)}"
         app:cardCornerRadius="8dp"
-        app:cardElevation="4dp"
-        android:onClick="@{() -> clickListener.onItemClick(task)}">
+        app:cardElevation="4dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -33,8 +33,8 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_marginStart="8dp"
-                android:checked="@{task.completed}"
-                android:layout_marginBottom="8dp" />
+                android:layout_marginBottom="8dp"
+                android:checked="@{task.completed}" />
 
             <!-- Task title -->
             <TextView
@@ -93,11 +93,11 @@
                 android:layout_alignStart="@id/tagsContainer"
                 android:layout_marginTop="8dp"
                 android:background="@drawable/chip_background"
+                android:onClick="@{() -> clickListener.onSubTaskClick(task)}"
                 android:paddingHorizontal="8dp"
                 android:paddingVertical="4dp"
                 android:text="@{@string/num_subtasks(task.subTasks.size())}"
                 android:textColor="@android:color/white"
-                android:onClick="@{() -> clickListener.onSubTaskClick(task)}"
                 android:textSize="12sp" />
 
             <RelativeLayout
@@ -113,6 +113,20 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
             </RelativeLayout>
+
+            <!-- Date TextView -->
+            <TextView
+                android:id="@+id/textViewDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:text="@{task.date}"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="12sp"
+                android:textStyle="italic" />
 
         </RelativeLayout>
 
