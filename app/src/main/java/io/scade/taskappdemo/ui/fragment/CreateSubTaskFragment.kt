@@ -9,7 +9,7 @@ import io.scade.taskappdemo.databinding.FragmentCreateSubtaskBinding
 import io.scade.taskappdemo.databinding.FragmentCreateTaskBinding
 import io.scade.taskappdemo.databinding.FragmentUpdateTaskBinding
 
-class CreateSubTaskFragment: Fragment() {
+class CreateSubTaskFragment : Fragment() {
     private lateinit var binding: FragmentCreateSubtaskBinding
 
 

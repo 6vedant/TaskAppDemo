@@ -10,7 +10,7 @@ import io.scade.taskappdemo.databinding.FragmentCreateTaskBinding
 import io.scade.taskappdemo.databinding.FragmentDisplayTaskBinding
 import io.scade.taskappdemo.model.Task
 
-class DisplayTaskFragment: Fragment() {
+class DisplayTaskFragment : Fragment() {
     private lateinit var binding: FragmentDisplayTaskBinding
 
 

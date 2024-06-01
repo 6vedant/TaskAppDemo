@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import io.scade.taskappdemo.databinding.FragmentCreateSubtaskBinding
 import io.scade.taskappdemo.databinding.FragmentCreateTaskBinding
 
-class CreateTaskFragment: Fragment() {
+class CreateTaskFragment : Fragment() {
     private lateinit var binding: FragmentCreateTaskBinding
 
 
