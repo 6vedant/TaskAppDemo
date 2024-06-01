@@ -4,15 +4,24 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import io.scade.taskappdemo.databinding.FragmentCreateTaskBinding
 import io.scade.taskappdemo.databinding.FragmentDisplayTaskBinding
+import io.scade.taskappdemo.model.SubTask
 import io.scade.taskappdemo.model.Task
+import io.scade.taskappdemo.viewmodel.TaskViewModel
+import io.scade.taskappdemo.viewmodel.TaskViewModelFactory
 
 class DisplayTaskFragment : Fragment() {
     private lateinit var binding: FragmentDisplayTaskBinding
 
+    private val taskViewModel: TaskViewModel by viewModels<TaskViewModel> {
+        TaskViewModelFactory()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -31,5 +40,23 @@ class DisplayTaskFragment : Fragment() {
                 DisplayTaskFragmentDirections.actionNavigateToCreateTaskFragment()
             )
         }
+        val subTask1 = SubTask("kka", "k", "erhh", true)
+        val subTask2 = SubTask("kkaa", "k", "eaarhh", false)
+
+        val task = Task(
+            "k",
+            "k",
+            "k",
+            false,
+            mutableListOf(subTask1, subTask2),
+            listOf("tag1", "tag2"),
+            "3-10-2024"
+        )
+
+        taskViewModel.addTask(task)
+
+        taskViewModel.tasksList.observe(viewLifecycleOwner, Observer {
+            Toast.makeText(context, "Updated: " + it.toString(), Toast.LENGTH_SHORT).show()
+        })
     }
 }

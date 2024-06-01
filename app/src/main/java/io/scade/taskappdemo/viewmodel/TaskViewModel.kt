@@ -4,11 +4,13 @@ import android.app.ActivityManager.TaskDescription
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.liveData
 import io.scade.taskappdemo.model.SubTask
 import io.scade.taskappdemo.model.Task
 import io.scade.taskappdemo.util.StringUtils
 import java.lang.Exception
+import java.lang.IllegalArgumentException
 
 class TaskViewModel : ViewModel() {
     private val _tasksList: MutableLiveData<List<Task>?> = MutableLiveData<List<Task>?>()
@@ -41,7 +43,7 @@ class TaskViewModel : ViewModel() {
         return true
     }
 
-    fun getTasks(
+    fun updateTasksList(
         taskIDs: Array<String>,
         taskTitles: Array<String>,
         taskDescriptions: Array<String>?,
@@ -69,7 +71,7 @@ class TaskViewModel : ViewModel() {
         _tasksList.postValue(tasks)
     }
 
-    fun getSubTasks(
+    fun updateSubTasksList(
         subTaskIDs: Array<String>,
         parentTaskIDs: Array<String>,
         subTaskTitles: Array<String>,
@@ -106,4 +108,14 @@ class TaskViewModel : ViewModel() {
 
     }
 
+}
+
+class TaskViewModelFactory() : ViewModelProvider.Factory {
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
+        if(modelClass.isAssignableFrom(TaskViewModel::class.java)) {
+            @Suppress("UNCHECKED_CAST")
+            return TaskViewModel() as T
+        }
+        throw IllegalArgumentException("Unknown ViewModel class!")
+    }
 }
