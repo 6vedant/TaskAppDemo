@@ -18,7 +18,8 @@
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         app:cardCornerRadius="8dp"
-        app:cardElevation="4dp">
+        app:cardElevation="4dp"
+        android:onClick="@{() -> clickListener.onItemClick(task)}">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -32,6 +33,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_marginStart="8dp"
+                android:checked="@{task.completed}"
                 android:layout_marginBottom="8dp" />
 
             <!-- Task title -->
@@ -41,7 +43,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
                 android:layout_toRightOf="@+id/checkBoxTask"
-                android:text="Task Title"
+                android:text="@{task.title}"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
@@ -53,7 +55,7 @@
                 android:layout_below="@id/textViewTitle"
                 android:layout_alignStart="@id/textViewTitle"
                 android:layout_marginTop="4dp"
-                android:text="Task description goes here"
+                android:text="@{task.description}"
                 android:textColor="@android:color/darker_gray"
                 android:textSize="14sp" />
 
@@ -75,7 +77,7 @@
                     android:layout_marginEnd="4dp"
                     android:background="@drawable/tag_background"
                     android:padding="4dp"
-                    android:text="Tag 1"
+                    android:text="@{task.tags.toString()}"
                     android:textColor="@android:color/white"
                     android:textSize="12sp" />
 
@@ -93,8 +95,9 @@
                 android:background="@drawable/chip_background"
                 android:paddingHorizontal="8dp"
                 android:paddingVertical="4dp"
-                android:text="4 subtasks"
+                android:text="@{@string/num_subtasks(task.subTasks.size())}"
                 android:textColor="@android:color/white"
+                android:onClick="@{() -> clickListener.onSubTaskClick(task)}"
                 android:textSize="12sp" />
 
             <RelativeLayout

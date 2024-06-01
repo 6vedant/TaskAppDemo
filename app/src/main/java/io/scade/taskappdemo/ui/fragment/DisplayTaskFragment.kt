@@ -9,6 +9,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import io.scade.taskappdemo.adapter.TaskItemClickListener
+import io.scade.taskappdemo.adapter.TaskRecyclerAdapter
 import io.scade.taskappdemo.databinding.FragmentCreateTaskBinding
 import io.scade.taskappdemo.databinding.FragmentDisplayTaskBinding
 import io.scade.taskappdemo.model.SubTask
@@ -47,7 +50,7 @@ class DisplayTaskFragment : Fragment() {
             "k",
             "k",
             "k",
-            false,
+            true,
             mutableListOf(subTask1, subTask2),
             listOf("tag1", "tag2"),
             "3-10-2024"
@@ -55,8 +58,22 @@ class DisplayTaskFragment : Fragment() {
 
         taskViewModel.addTask(task)
 
+
+        // init the adapter and bind it to the recyclerview
+        val taskRecyclerAdapter =
+            TaskRecyclerAdapter(listOf(task), TaskItemClickListener(itemClickListener = {
+                Toast.makeText(context, "clicked on item", Toast.LENGTH_SHORT).show()
+            }, subTaskTextClickListener = {
+                Toast.makeText(context, "Clickedo n subtask", Toast.LENGTH_SHORT).show()
+            }))
+
+        binding.recyclerViewTasks.layoutManager = LinearLayoutManager(context)
+        binding.recyclerViewTasks.setHasFixedSize(true)
+        binding.recyclerViewTasks.adapter = taskRecyclerAdapter
+
         taskViewModel.tasksList.observe(viewLifecycleOwner, Observer {
             Toast.makeText(context, "Updated: " + it.toString(), Toast.LENGTH_SHORT).show()
+
         })
     }
 }

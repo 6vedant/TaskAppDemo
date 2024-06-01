@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">TaskAppDemo</string>
+
+    <string name="num_subtasks">%d Sub-Task(s)</string>
 </resources>

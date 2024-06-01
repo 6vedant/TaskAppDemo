@@ -31,15 +31,16 @@ public class TaskRecyclerAdapter constructor(
     class ItemViewHolder constructor(private val binding: TaskRecyclerItemBinding) :
         ViewHolder(binding.root) {
         fun bind(item: Task?, clickListener: TaskItemClickListener) {
-            (binding as TaskRecyclerItemBinding).apply {
-                binding.task = task
+            item.let {
+                binding.task = it
                 binding.clickListener = clickListener
             }
         }
     }
 }
 
-class TaskItemClickListener(val clickListener: (task: Task) -> Unit) {
-    fun onClick(task: Task) = clickListener(task)
+class TaskItemClickListener(val itemClickListener: (task: Task) -> Unit, val subTaskTextClickListener: (task: Task) -> Unit ) {
+    fun onItemClick(task: Task) = itemClickListener(task)
+    fun onSubTaskClick(task: Task) = subTaskTextClickListener(task)
 
 }
